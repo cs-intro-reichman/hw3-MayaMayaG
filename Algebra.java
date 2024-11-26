@@ -62,36 +62,26 @@ public class Algebra {
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		int div = x1;
-		int count = 0;
-		for(int i=0;i<=x2;i++)
-		{
-			/*if (x2 == 0)
-			{
-				count = -1; // אני רוצה להחזיר NULL
-				i=x2++;
-			}*/
-
-			if(div >= x2)
-			{
-				div = minus(div, x2);
-				count++;
-			}
-
+		if (x2 == 0) {
+			return -1;
 		}
-		return count;
+		int div = 0;
+		while (x1 >= x2) {
+			x1 = minus(x1, x2);  // הפחתת x2 כל פעם
+			div++;  // כל פעם שהפחתת, הגדל את הספירה
+		}
+		return div;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
 		int mod = x1;
+		if (x2==0)
+		{
+			throw new ArithmeticException("Modulo by zero is not allowed");
+		}
 		while (mod>=x2)
 		{
-			if (x2 == 0)
-			{
-				mod = -1; // אני רוצה להחזיר NULL
-			}
-
 			if(mod >= x2)
 				{
 					mod = minus(mod, x2);
@@ -104,6 +94,10 @@ public class Algebra {
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
 		int sqrt = 0;
+		if(x==0)
+		{
+			return -1;
+		}
 		while (x!=0)
 		{
 			x=div(x,2);
