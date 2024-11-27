@@ -24,48 +24,44 @@ public class LoanCalc {
         System.out.println("number of iterations: " + iterationCounter);
     }
 
-   
-    private static double endBalance(double loan, double rate, int n, double payment) {
-        double x = loan;
-        for (int i = 0; i <= n; i++) 
+	private static double endBalance(double loan, double rate, int n, double payment){
+		double x = loan;
+		for (int i = 0; i < n; i++)
 		{
             x = (x - payment) * (1 + (rate / 100));
-        }
-        return x;
-    }
+		}
 
-    
+		return x;
+	}
+
+   
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
-        int iterationCounter = 0;
-        double g = loan;
-        double periodPayment = loan / n;
-        while (g >= epsilon) {
-            g = endBalance(loan, rate, iterationCounter, periodPayment);
-            if (g <= epsilon) {
-                break;
-            } else {
-                periodPayment = periodPayment + epsilon;
-                g = loan;
-            }
+        iterationCounter = 0;
+        double g = loan / n;
+        double periodPayment = endBalance(loan, rate, n, g);
+        while (periodPayment > 0) {
+            g = g + epsilon;
+			periodPayment = endBalance(loan, rate, n, g);
             iterationCounter++;
         }
-        return periodPayment;
+        return g;
     }
 
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {
-        double low = 0;
+        double low = loan / n;
         double high = loan;
         double periodPayment = (low + high) / 2;
-        int iterationCounter = 0;
+        iterationCounter = 0;
         while ((high - low) > epsilon) {
-            if ((endBalance(loan, rate, n, periodPayment) * endBalance(loan, rate, n, low)) > 0) {
+            if (endBalance(loan, rate, n, periodPayment) * endBalance(loan, rate, n, low) > 0) {
                 low = periodPayment;
             } else {
                 high = periodPayment;
             }
-            periodPayment = (low + high) / 2;
+			periodPayment = (low + high) / 2;
             iterationCounter++;
         }
         return periodPayment;
-	}
+    }
+
 }

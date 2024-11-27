@@ -21,16 +21,42 @@ public class Algebra {
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
 		int add = 0;
-		for( int i=0 ; i< x2+1; i++)
+		int newX = x2;
+		if (x2 < 0)
 		{
-			add = x1++;
+			newX = 0;
+			int n=0;
+			while(n > x)
+			{
+				newX++;
+				n--;
+			}
+			x2 = newX;
 		}
+		for( int i=0 ; i< x2+1; i++)
+			{
+				add = x1++;
+			}
+
 		return add;
+
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
 		int sub = 0;
+		int newX = x2;
+		if (x2 < 0)
+		{
+			newX = 0;
+			int n=0;
+			while(n > x)
+			{
+				newX++;
+				n--;
+			}
+			x2 = newX;
+		}
 		for(int i=0; i<x2+1; i++)
 			{
 				sub = x1--;
@@ -41,6 +67,18 @@ public class Algebra {
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
 		int mul = 0;
+		int newX = x2;
+		if (x2 < 0)
+		{
+			newX = 0;
+			int n=0;
+			while(n > x)
+			{
+				newX++;
+				n--;
+			}
+			x2 = newX;
+		}
 		for(int i=0; i<x2; i++)
 		{
 			 mul = plus (mul, x1);
@@ -63,12 +101,24 @@ public class Algebra {
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
 		if (x2 == 0) {
-			return -1;
+			return 0;
 		}
 		int div = 0;
+		int newX = x2;
+		if (x2 < 0)
+		{
+			newX = 0;
+			int n=0;
+			while(n > x)
+			{
+				newX++;
+				n--;
+			}
+			x2 = newX;
+		}
 		while (x1 >= x2) {
-			x1 = minus(x1, x2);  // הפחתת x2 כל פעם
-			div++;  // כל פעם שהפחתת, הגדל את הספירה
+			x1 = minus(x1, x2);  
+			div++;  
 		}
 		return div;
 	}
@@ -76,9 +126,21 @@ public class Algebra {
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
 		int mod = x1;
+		int newX = x2;
 		if (x2==0)
 		{
-			throw new ArithmeticException("Modulo by zero is not allowed");
+			return 0;
+		}
+		else if (x2 < 0)
+		{
+			newX = 0;
+			int n=0;
+			while(n > x)
+			{
+				newX++;
+				n--;
+			}
+			x2 = newX;
 		}
 		while (mod>=x2)
 		{
@@ -93,18 +155,24 @@ public class Algebra {
 	
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		int sqrt = 0;
+        int sqrt = 0;
+		int n = 0;
+
 		if(x==0)
 		{
-			return -1;
+			return 0;
 		}
-		while (x!=0)
-		{
-			x=div(x,2);
-			sqrt++;
-		}
-		
-		return sqrt;
+
+        while (sqrt < n) {
+            n++;
+            sqrt = times(n, n);
+        }
+        if (sqrt > n) {
+            n--;
+            return n;
+        }
+
+        return n;
 	}	  	  
 
 }
