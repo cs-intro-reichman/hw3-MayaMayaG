@@ -76,24 +76,25 @@ public class Algebra {
 	public static int times(int x1, int x2) {
 		int mul = 0;
 		int newX = x2;
-		if (x2 == 0)
+		if (x2 == 0 || x1 == 0)
 		{
 			return 0;
 		}
-		if (x2 < 0)
+		
+		if(x2 > 0)
 		{
-			newX = 0;
-			int n=0;
-			while(n > newX)
+			for(int i=0; i<x2; i++)
 			{
-				newX++;
-				n--;
+				mul = plus (mul, x1);
 			}
-			x2 = newX;
 		}
-		for(int i=0; i<x2; i++)
+		
+		else
 		{
-			 mul = plus (mul, x1);
+			for(int i=0; i<x2; i++)
+			{
+				mul = minus(mul, x1);
+			}	
 		}
 		
 		return mul;
@@ -117,29 +118,73 @@ public class Algebra {
 		
 		return pow;
 	}
-
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		if (x2 == 0) {
-			return 0;
-		}
 		int div = 0;
 		int newX = x2;
-		if (x2 < 0)
+
+		if (x2 == 0) 
 		{
-			newX = 0;
-			int n=0;
-			while(n > newX)
+			return 0;
+		}
+		if(x1 >= 0 && x2 > 0)
+		{
+			while (x1 >= x2)
 			{
-				newX++;
-				n--;
+				div++;
+				x1 = minus(x1, x2);	
 			}
-			x2 = newX;
+
+			return div;
 		}
-		while (x1 >= x2) {
-			x1 = minus(x1, x2);  
-			div++;  
+		if((x1 < 0 && x2 > 0) || (x1 > 0 && x2 < 0))
+		{
+			if (x2 < 0)
+			{
+				newX = 0;
+				int n=0;
+				while(n > newX)
+				{
+					newX++;
+					n--;
+				}
+				x2 = newX;
+			}
+			if (x1 < 0)
+			{
+				newX = 0;
+				int n=0;
+				while(n > newX)
+				{
+					newX++;
+					n--;
+				}
+				x1 = newX;
+			}
+			
+			while (x1 >= x2) 
+			{
+				div--;
+				x1=minus(x1, x2);	
+			}
+
+			return div;
 		}
+
+		if(x1 < 0 && x2 < 0)
+		{
+			while (x1 >= x2)
+			{
+				while (x1 >= x2)
+				{
+					div++;
+					x1=minus(x1, x2);	
+				}	
+			}
+
+			return div;
+		}
+		
 		return div;
 	}
 
