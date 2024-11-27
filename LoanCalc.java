@@ -63,5 +63,4 @@ public class LoanCalc {
         }
         return periodPayment;
     }
-
 }

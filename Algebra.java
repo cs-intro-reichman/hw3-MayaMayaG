@@ -26,7 +26,7 @@ public class Algebra {
 		{
 			newX = 0;
 			int n=0;
-			while(n > x)
+			while(n > newX)
 			{
 				newX++;
 				n--;
@@ -50,7 +50,7 @@ public class Algebra {
 		{
 			newX = 0;
 			int n=0;
-			while(n > x)
+			while(n > newX)
 			{
 				newX++;
 				n--;
@@ -72,7 +72,7 @@ public class Algebra {
 		{
 			newX = 0;
 			int n=0;
-			while(n > x)
+			while(n > newX)
 			{
 				newX++;
 				n--;
@@ -109,7 +109,7 @@ public class Algebra {
 		{
 			newX = 0;
 			int n=0;
-			while(n > x)
+			while(n > newX)
 			{
 				newX++;
 				n--;
@@ -135,7 +135,7 @@ public class Algebra {
 		{
 			newX = 0;
 			int n=0;
-			while(n > x)
+			while(n > newX)
 			{
 				newX++;
 				n--;
@@ -155,19 +155,14 @@ public class Algebra {
 	
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-        int sqrt = 0;
 		int n = 0;
+        int sqrt = 0;
 
-		if(x==0)
-		{
-			return 0;
-		}
-
-        while (sqrt < n) {
+        while (sqrt < x) {
             n++;
             sqrt = times(n, n);
         }
-        if (sqrt > n) {
+        if (sqrt > x) {
             n--;
             return n;
         }
