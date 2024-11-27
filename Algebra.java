@@ -36,12 +36,18 @@ public class Algebra {
 				n--;
 			}
 			x2 = newX;
+
+			return minus(x1, x2);
+
 		}
-		for( int i=0 ; i< x2+1; i++)
+		else
+		{
+			for( int i=0 ; i< x2+1; i++)
 			{
 				add = x1++;
 			}
-
+		}
+		
 		return add;
 
 	}
@@ -64,11 +70,16 @@ public class Algebra {
 				n--;
 			}
 			x2 = newX;
+			return plus(x1, x2);
 		}
-		for(int i=0; i<x2+1; i++)
+		else
+		{
+			for(int i=0; i<x2+1; i++)
 			{
 				sub = x1--;
 			}
+		}
+	
 		return sub;
 	}
 
@@ -188,28 +199,8 @@ public class Algebra {
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		int mod = x1;
-		int newX = x2;
-		if (x2==0)
-		{
-			return 0;
-		}
-		else if (x2 < 0)
-		{
-			newX = 0;
-			int n=0;
-			while(n > x2)
-			{
-				newX++;
-				n--;
-			}
-			x2 = newX;
-		}
-		while (mod>=x2)
-		{
-			mod = minus(mod, x2);
-
-		}
+		int divide = div(x1, x2);
+		int mod = x1 - times(divide, x2);
 		return mod;
 	}	
 
