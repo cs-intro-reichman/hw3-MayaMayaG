@@ -30,7 +30,7 @@ public class Algebra {
 		{
 			newX = 0;
 			int n=0;
-			while(n > newX)
+			while(n > x2)
 			{
 				newX++;
 				n--;
@@ -58,7 +58,7 @@ public class Algebra {
 		{
 			newX = 0;
 			int n=0;
-			while(n > newX)
+			while(n > x2)
 			{
 				newX++;
 				n--;
@@ -111,6 +111,7 @@ public class Algebra {
 		{
 			return 0;
 		}
+	
 		for (int i = 0; i<n; i++)
 		{
 			pow = times(pow, x);
@@ -143,7 +144,7 @@ public class Algebra {
 			{
 				newX = 0;
 				int n=0;
-				while(n > newX)
+				while(n > x2)
 				{
 					newX++;
 					n--;
@@ -154,7 +155,7 @@ public class Algebra {
 			{
 				newX = 0;
 				int n=0;
-				while(n > newX)
+				while(n > x1)
 				{
 					newX++;
 					n--;
@@ -175,11 +176,8 @@ public class Algebra {
 		{
 			while (x1 >= x2)
 			{
-				while (x1 >= x2)
-				{
-					div++;
-					x1=minus(x1, x2);	
-				}	
+				div++;
+				x1=minus(x1, x2);	
 			}
 
 			return div;
@@ -200,7 +198,7 @@ public class Algebra {
 		{
 			newX = 0;
 			int n=0;
-			while(n > newX)
+			while(n > x2)
 			{
 				newX++;
 				n--;
@@ -209,10 +207,8 @@ public class Algebra {
 		}
 		while (mod>=x2)
 		{
-			if(mod >= x2)
-				{
-					mod = minus(mod, x2);
-				}
+			mod = minus(mod, x2);
+
 		}
 		return mod;
 	}	
