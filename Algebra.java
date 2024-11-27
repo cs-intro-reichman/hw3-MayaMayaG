@@ -22,6 +22,10 @@ public class Algebra {
 	public static int plus(int x1, int x2) {
 		int add = 0;
 		int newX = x2;
+		if(x2 == 0)
+		{
+			return x1;
+		}
 		if (x2 < 0)
 		{
 			newX = 0;
@@ -46,6 +50,10 @@ public class Algebra {
 	public static int minus(int x1, int x2) {
 		int sub = 0;
 		int newX = x2;
+		if(x2 == 0)
+		{
+			return x1;
+		}
 		if (x2 < 0)
 		{
 			newX = 0;
@@ -68,6 +76,10 @@ public class Algebra {
 	public static int times(int x1, int x2) {
 		int mul = 0;
 		int newX = x2;
+		if (x2 == 0)
+		{
+			return 0;
+		}
 		if (x2 < 0)
 		{
 			newX = 0;
@@ -90,6 +102,14 @@ public class Algebra {
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
 		int pow = 1;
+		if(n == 0)
+		{
+			return 1;
+		}
+		if(x == 0)
+		{
+			return 0;
+		}
 		for (int i = 0; i<n; i++)
 		{
 			pow = times(pow, x);
@@ -157,7 +177,7 @@ public class Algebra {
 	public static int sqrt(int x) {
 		int n = 0;
         int sqrt = 0;
-
+		
         while (sqrt < x) {
             n++;
             sqrt = times(n, n);
