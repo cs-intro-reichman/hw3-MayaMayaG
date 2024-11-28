@@ -21,60 +21,41 @@ public class Algebra {
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
 		int add = 0;
-		int newX = x2;
-		if(x2 == 0)
-		{
-			return x1;
-		}
-		if (x2 < 0)
-		{
-			newX = 0;
-			int n=0;
-			while(n > x2)
-			{
-				newX++;
-				n--;
-			}
-			x2 = newX;
-
-			return minus(x1, x2);
-
-		}
-		else
-		{
-			for( int i=0 ; i< x2+1; i++)
+		if(x2 > 0)
+		 {
+			for(int i=0; i < x2 + 1; i++)
 			{
 				add = x1++;
 			}
-		}
-		
-		return add;
+		 }
+		 else
+		 {
+			for( int i=0 ; i< Math.abs(x2) + 1; i++)
+			{
+				add = x1--;
+			}
+		 }
+		 return add;
 
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
 		int sub = 0;
-		int newX = x2;
 		if(x2 == 0)
 		{
 			return x1;
 		}
 		if (x2 < 0)
 		{
-			newX = 0;
-			int n=0;
-			while(n > x2)
+			for(int i=0; i < Math.abs(x2) + 1; i++)
 			{
-				newX++;
-				n--;
+				sub++;
 			}
-			x2 = newX;
-			return plus(x1, x2);
 		}
 		else
 		{
-			for(int i=0; i<x2+1; i++)
+			for(int i=0; i < x2 + 1; i++)
 			{
 				sub = x1--;
 			}
@@ -86,25 +67,27 @@ public class Algebra {
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
 		int mul = 0;
-		int newX = x2;
+		int newMul = 0;
 		if (x2 == 0 || x1 == 0)
 		{
 			return 0;
 		}
 		
-		if(x2 > 0)
+		if(x2 > 0 && x1 > 0)
 		{
 			for(int i=0; i<x2; i++)
 			{
 				mul = plus (mul, x1);
 			}
+			
+			return mul;
 		}
 		
 		else
 		{
-			for(int i=0; i<x2; i++)
+			for(int i=0; i < Math.abs(x2); i++)
 			{
-				mul = minus(mul, x1);
+				mul = minus(mul, Math.abs(x1));
 			}	
 		}
 		
@@ -114,18 +97,24 @@ public class Algebra {
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
 		int pow = 1;
-		if(n == 0)
-		{
-			return 1;
-		}
 		if(x == 0)
 		{
 			return 0;
 		}
-	
-		for (int i = 0; i<n; i++)
+		if(n == 0)
 		{
-			pow = times(pow, x);
+			return 1;
+		}
+		if(n == 1)
+		{
+			return x;
+		}
+		else
+		{
+			for (int i = 0; i < n; i++)
+			{
+				pow = times(pow, x);
+			}
 		}
 		
 		return pow;
@@ -133,65 +122,65 @@ public class Algebra {
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
 		int div = 0;
-		int newX = x2;
 
-		if (x2 == 0) 
+		if (x2 == 0 || x1== 0) 
 		{
 			return 0;
 		}
-		if(x1 >= 0 && x2 > 0)
+		if(x2 == 1)
 		{
-			while (x1 >= x2)
+			return x1;
+		}
+		if(x1 > 0 && x2 > 0)
+		{
+			while (x1 > 0)
 			{
 				div++;
 				x1 = minus(x1, x2);	
 			}
-
-			return div;
-		}
-		if((x1 < 0 && x2 > 0) || (x1 > 0 && x2 < 0))
-		{
-			if (x2 < 0)
-			{
-				newX = 0;
-				int n=0;
-				while(n > x2)
-				{
-					newX++;
-					n--;
-				}
-				x2 = newX;
-			}
-			if (x1 < 0)
-			{
-				newX = 0;
-				int n=0;
-				while(n > x1)
-				{
-					newX++;
-					n--;
-				}
-				x1 = newX;
-			}
-			
-			while (x1 >= x2) 
+			if(x1 < 0)
 			{
 				div--;
-				x1=minus(x1, x2);	
 			}
 
 			return div;
 		}
+		if(x1 < 0 && x2 > 0)
+		{	
+				while (x1 < 0) 
+				{
+					div--;
+					x1=plus(x1, x2);	
+				}
+				if(x1 > 0)
+				{
+					div++;
+				}
+			}
+		else if(x1 > 0 && x2 < 0)
+			{
+				while (x1 > 0) 
+				{
+					div--;
+					x1 = plus(x1, x2);	
+				}
+				if(x1 < 0)
+				{
+					div++;
+				}
+			}
 
 		if(x1 < 0 && x2 < 0)
 		{
-			while (x1 >= x2)
+			while (x1 < 0)
 			{
 				div++;
 				x1=minus(x1, x2);	
 			}
-
-			return div;
+			if(x1 > 0)
+			{
+				div--;
+			}
 		}
 		
 		return div;
@@ -199,8 +188,11 @@ public class Algebra {
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		int divide = div(x1, x2);
-		int mod = x1 - times(divide, x2);
+		int mod = 0;
+		if(x2 > 0)
+		{
+			mod = minus(x1, times(x2, div(x1,x2)));
+		}
 		return mod;
 	}	
 
