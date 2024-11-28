@@ -202,11 +202,13 @@ public class Algebra {
 		int n = 0;
         int sqrt = 0;
 		
-        while (sqrt < x) {
+        while (sqrt < x) 
+		{
             n++;
             sqrt = times(n, n);
         }
-        if (sqrt > x) {
+        if (sqrt > x) 
+		{
             n--;
             return n;
         }

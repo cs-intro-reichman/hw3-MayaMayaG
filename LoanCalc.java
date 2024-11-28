@@ -39,7 +39,8 @@ public class LoanCalc {
         iterationCounter = 0;
         double g = loan / n;
         double periodPayment = endBalance(loan, rate, n, g);
-        while (periodPayment > 0) {
+        while (periodPayment > 0) 
+		{
             g = g + epsilon;
 			periodPayment = endBalance(loan, rate, n, g);
             iterationCounter++;
@@ -52,10 +53,14 @@ public class LoanCalc {
         double high = loan;
         double periodPayment = (low + high) / 2;
         iterationCounter = 0;
-        while ((high - low) > epsilon) {
-            if (endBalance(loan, rate, n, periodPayment) * endBalance(loan, rate, n, low) > 0) {
+        while ((high - low) > epsilon) 
+		{
+            if (endBalance(loan, rate, n, periodPayment) * endBalance(loan, rate, n, low) > 0) 
+			{
                 low = periodPayment;
-            } else {
+            } 
+			else 
+			{
                 high = periodPayment;
             }
 			periodPayment = (low + high) / 2;
